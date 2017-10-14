@@ -1,29 +1,41 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
-	<meta charset="utf-8">
-	<title>Raunak Neighborhood Map</title>
-	<link rel="stylesheet" href="css/style.css">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Map</title>
+  <link href="style/style.css" rel="stylesheet">
 </head>
+
 <body>
-	<h1 align="center" style="color:#525454" style="font-family: Verdana">Neighbourhood Map</h1>
-	<div class="search" id="search">
-		<input class="search-box" id="search-box" placeholder="Search for names.." data-bind="textInput: searchTerm, valueUpdate: 'afterkeydown'" />
-	</div>
-	<div class="app" id="app">
-		<div class="list" id="list">
-			<ul class="results" id="results" data-bind="foreach: filteredList">
-				<li class="place" id="place" data-bind="text: name, click: bounce"></li>
-			</ul>
-		</div>
-		<div class="map" id="map">If you can read this, there has been an error loading Google Maps. Please Try Again.</div>
-	</div>
+  <div class="flex-container">
+    <div class="searchView" id="searchView">
+      <div class="nav list-group">
+        <div class="input">
+          <input type="text" class="form-control boxy" id="place-filter-input" placeholder="Search.." data-bind="textInput: filterValue" name="srch-term"/>
+        </div>
+        <ul class="nav nav-stacked" data-bind="foreach: placeList">
+          <li class="nav-justified">
+            <button type="button" class="boxy place-list-btn" data-bind="visible: $data.visible, attr: {id: $data.id}, text: $data.title, click: $parent.triggerMap"></button>
+          </li>
+        </ul>
+      </div>
+    </div>
 
+    <div class="full-map" id="map-area">
+      <div id="map">
+      </div>
+    </div>
+  </div>
 
-	<script src='js/knockout-3.4.0.js'></script>
-	<script src='js/jquery-1.12.0.min.js'></script>
-	<script src='js/app.js'></script>
-	<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDA6qoUKQ3WJQd4ZxAahhFPM80WJbw-yws&callback=startApp&libraries=places" onerror="errorHandling()"></script>
+  <footer>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet"  crossorigin="anonymous">
+    <script src="jquery-1.12.0.min.js"></script>
+    <script src="knockout-3.4.0.js"></script>
+    <script src="js/m.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDD7C9uGbg7iHg53lmERLruEukoAcfDvBI&callback=initGoogleMap" onerror="googleError()" async defer></script>
+  </footer>
 </body>
+
 </html>
